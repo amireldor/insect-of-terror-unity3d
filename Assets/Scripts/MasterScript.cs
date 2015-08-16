@@ -5,6 +5,7 @@ using System.Collections;
 public class MasterScript : MonoBehaviour {
 
 	public GameObject enemyPrefab;
+    public CameraScript camera_script;
 
 	public float left, top, right, bottom;
 	public float enemy_rotation_speed;
@@ -27,6 +28,8 @@ public class MasterScript : MonoBehaviour {
         countdown = countdown_start;
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
+
+        camera_script.TwirlUp();
 	}
 
 	/// <summary>
