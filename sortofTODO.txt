@@ -1,8 +1,8 @@
 ﻿# phase #1
-nice background
-show text of someting, should be beautiful
-continue to create enemies
-do something that looks like a level, reach boss
+	nice background
+	show text of someting, should be beautiful
+	continue to create enemies
+	do something that looks like a level, reach boss
 
 # phase 1.2, boss
 turning boss shooting jukim
