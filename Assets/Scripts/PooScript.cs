@@ -44,7 +44,7 @@ public class PooScript : MonoBehaviour {
 
 			// poop all enemies
 			foreach (GameObject obj in colliding_enemies) {
-				obj.SendMessage ("Shitted");
+                if (obj) obj.SendMessage ("Shitted");
 			}
 
 			Destroy(this.gameObject);

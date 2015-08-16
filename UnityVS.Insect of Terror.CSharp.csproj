@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,27 +73,6 @@
     <Compile Include="Assets\Scripts\LawnMowerScript.cs" />
     <Compile Include="Assets\Scripts\MasterScript.cs" />
     <Compile Include="Assets\Scripts\PooScript.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitattributes" />
-    <Content Include=".gitignore" />
-    <Content Include="ProjectSettings\ProjectVersion.txt" />
-    <Content Include="sortofTODO.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ProjectSettings\AudioManager.asset" />
-    <None Include="ProjectSettings\DynamicsManager.asset" />
-    <None Include="ProjectSettings\EditorBuildSettings.asset" />
-    <None Include="ProjectSettings\EditorSettings.asset" />
-    <None Include="ProjectSettings\GraphicsSettings.asset" />
-    <None Include="ProjectSettings\InputManager.asset" />
-    <None Include="ProjectSettings\NavMeshAreas.asset" />
-    <None Include="ProjectSettings\NetworkManager.asset" />
-    <None Include="ProjectSettings\Physics2DSettings.asset" />
-    <None Include="ProjectSettings\ProjectSettings.asset" />
-    <None Include="ProjectSettings\QualitySettings.asset" />
-    <None Include="ProjectSettings\TagManager.asset" />
-    <None Include="ProjectSettings\TimeManager.asset" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

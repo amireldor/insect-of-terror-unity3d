@@ -8,6 +8,8 @@ public class MasterScript : MonoBehaviour {
 	public float left, top, right, bottom;
 	public float enemy_rotation_speed;
 	public float enemy_speed;
+    public float create_enemy_delay = 0.7f;
+    public int max_enemies = 30;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +22,7 @@ public class MasterScript : MonoBehaviour {
 		}
 
 		InvokeRepeating ("RotateEnemies", 0, 0.02f);
+        InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
 	}
 
 	/// <summary>
@@ -35,6 +38,49 @@ public class MasterScript : MonoBehaviour {
 			}
 		}
 	}
+
+    void CreateRandomEnemy()
+    {
+        // limit active enemies number
+        int counter = 0;
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            EnemyScript script = obj.GetComponent<EnemyScript>();
+            if (!script || script.IsShitted()) continue;
+            counter++;
+        }
+        if (counter >= max_enemies)
+        {
+            return;
+        }
+
+        Vector3 new_pos = Vector3.zero;
+        switch (Random.Range(0, 4))
+        {
+            // position in one of edges of screen
+            case 0:
+                new_pos.x = left;
+                new_pos.y = top + (bottom - top) * Random.value;
+                break;
+            case 1:
+                new_pos.x = right;
+                new_pos.y = top + (bottom - top) * Random.value;
+                break;
+            case 2:
+                new_pos.x = left + (right - left) * Random.value;
+                new_pos.y = top;
+                break;
+            case 3:
+                new_pos.x = left + (right - left) * Random.value;
+                new_pos.y = bottom;
+                break;
+        }
+
+        GameObject new_enemy = Instantiate(enemyPrefab, new_pos, Quaternion.identity) as GameObject;
+        // call Initialize
+        new_enemy.GetComponent<EnemyScript>().Initialize(0, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
+        new_enemy.transform.Rotate(new Vector3(0, 0, Random.value * 360));
+    }
 
 	// Update is called once per frame
 	void Update () {
