@@ -37,6 +37,12 @@ public class MasterScript : MonoBehaviour {
         my_level = InterestingGameStuff.level;
         score_max += (score_max / 10) * my_level;
         UpdateScoreText();
+
+        // change background image
+        GameObject bg = GameObject.Find("/Background");
+        SpriteRenderer bg_renderer = bg.GetComponent<SpriteRenderer>();
+        Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
+        bg_renderer.sprite = bg_sprite;
 	}
 
 	/// <summary>
