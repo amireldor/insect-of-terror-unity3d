@@ -11,14 +11,22 @@ public class MasterScript : MonoBehaviour {
 	public float enemy_speed;
     public float create_enemy_delay = 0.7f;
     public int max_enemies = 30;
+
     public Text score_text;
+    public Text countdown_text;
     private int score;
+    public int score_max = 500;
+    public int countdown_start = 30;
+    private int countdown;
 
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating ("RotateEnemies", 0, 0.02f);
         InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
         UpdateScoreText();
+        countdown = countdown_start;
+        UpdateCountdownText();
+        InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
 	}
 
 	/// <summary>
@@ -86,7 +94,23 @@ public class MasterScript : MonoBehaviour {
 
     void UpdateScoreText()
     {
-        score_text.text = "Score: " + score;
+        score_text.text = "Score: " + score + "/" + score_max;
+    }
+
+    void UpdateCountdownText()
+    {
+        countdown_text.text = "Time: " + countdown;
+    }
+
+    void CountdownBeat()
+    {
+        countdown--;
+        if (countdown <= 0)
+        {
+            countdown = 0;
+            // level over
+        }
+        UpdateCountdownText();
     }
 
 	// Update is called once per frame
