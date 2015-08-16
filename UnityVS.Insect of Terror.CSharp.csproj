@@ -80,6 +80,7 @@
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
     <Content Include="ProjectSettings\ProjectVersion.txt" />
+    <Content Include="sortofTODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ProjectSettings\AudioManager.asset" />
