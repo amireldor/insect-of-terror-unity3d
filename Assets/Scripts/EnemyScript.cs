@@ -79,8 +79,8 @@ public class EnemyScript : MonoBehaviour {
 
 	void MowedByLawnMower() {
 		if (shitted) {
-			// TODO add score!
-			//GetComponent<Renderer>().enabled = false;
+            MasterScript master = GameObject.Find("/MasterObject").GetComponent<MasterScript>();
+            master.SendMessage("ScoreUp", 20);
 			Destroy (this.gameObject);
 		}
 	}
