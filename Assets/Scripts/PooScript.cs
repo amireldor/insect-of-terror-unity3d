@@ -38,7 +38,7 @@ public class PooScript : MonoBehaviour {
 
 	void FixedUpdate() {
 		Vector3 new_position = transform.position;
-		new_position.y -= speed * Time.deltaTime;
+		new_position.y -= speed * Time.fixedDeltaTime;
 		if (new_position.y < final_height) {
 			new_position.y = final_height;
 

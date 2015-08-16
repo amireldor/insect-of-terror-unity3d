@@ -39,7 +39,7 @@ public class LawnMowerScript : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (velocity != Vector3.zero) {
-			transform.position += velocity * Time.deltaTime;
+			transform.position += velocity * Time.fixedDeltaTime;
 
 			if (transform.position.x > master.right) {
 				Vector3 new_pos = transform.position;

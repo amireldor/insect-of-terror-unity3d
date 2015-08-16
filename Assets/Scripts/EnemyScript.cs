@@ -55,8 +55,8 @@ public class EnemyScript : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (!shitted) {
-			transform.Rotate (rotationVector * Time.deltaTime);
-			transform.position += transform.up * speed * Time.deltaTime;
+			transform.Rotate (rotationVector * Time.fixedDeltaTime);
+			transform.position += transform.up * speed * Time.fixedDeltaTime;
 
 			Vector3 position = transform.position;
 
