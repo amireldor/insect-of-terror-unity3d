@@ -77,6 +77,8 @@
     <Compile Include="Assets\Scripts\PooScript.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <Content Include="ProjectSettings\ProjectVersion.txt" />
   </ItemGroup>
   <ItemGroup>
