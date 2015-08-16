@@ -2,6 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 
+public static class InterestingGameStuff
+{
+    public static int level = 0;
+}
+
 public class MasterScript : MonoBehaviour {
 
 	public GameObject enemyPrefab;
@@ -19,6 +24,7 @@ public class MasterScript : MonoBehaviour {
     public int score_max = 500;
     public int countdown_start = 30;
     private int countdown;
+    private int my_level;
 
 	// Use this for initialization
 	void Start () {
@@ -28,8 +34,9 @@ public class MasterScript : MonoBehaviour {
         countdown = countdown_start;
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
-
-        camera_script.TwirlUp();
+        my_level = InterestingGameStuff.level;
+        score_max += (score_max / 10) * my_level;
+        UpdateScoreText();
 	}
 
 	/// <summary>
@@ -85,7 +92,7 @@ public class MasterScript : MonoBehaviour {
 
         GameObject new_enemy = Instantiate(enemyPrefab, new_pos, Quaternion.identity) as GameObject;
         // call Initialize
-        new_enemy.GetComponent<EnemyScript>().Initialize(0, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
+        new_enemy.GetComponent<EnemyScript>().Initialize(my_level, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
         new_enemy.transform.Rotate(new Vector3(0, 0, Random.value * 360));
     }
 
@@ -93,6 +100,13 @@ public class MasterScript : MonoBehaviour {
     {
         score += howmuch;
         UpdateScoreText();
+        
+        // end level?
+        if (score >= score_max)
+        {
+            InterestingGameStuff.level++;
+            Application.LoadLevel("level");
+        }
     }
 
     void UpdateScoreText()
