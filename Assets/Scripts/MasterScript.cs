@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MasterScript : MonoBehaviour {
@@ -10,19 +11,14 @@ public class MasterScript : MonoBehaviour {
 	public float enemy_speed;
     public float create_enemy_delay = 0.7f;
     public int max_enemies = 30;
+    public Text score_text;
+    private int score;
 
 	// Use this for initialization
 	void Start () {
-		for (int i=0; i<10;i++) {
-			GameObject obj = Instantiate(enemyPrefab, new Vector3(-2 + Random.value* 4, -2 + Random.value * 4, 0), Quaternion.identity) as GameObject;
-
-			// call Initialize
-			obj.GetComponent<EnemyScript>().Initialize(0, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
-			obj.transform.Rotate(new Vector3(0, 0, Random.value * 360));
-		}
-
 		InvokeRepeating ("RotateEnemies", 0, 0.02f);
         InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
+        UpdateScoreText();
 	}
 
 	/// <summary>
@@ -80,6 +76,17 @@ public class MasterScript : MonoBehaviour {
         // call Initialize
         new_enemy.GetComponent<EnemyScript>().Initialize(0, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
         new_enemy.transform.Rotate(new Vector3(0, 0, Random.value * 360));
+    }
+
+    void ScoreUp(int howmuch = 1)
+    {
+        score += howmuch;
+        UpdateScoreText();
+    }
+
+    void UpdateScoreText()
+    {
+        score_text.text = "Score: " + score;
     }
 
 	// Update is called once per frame
