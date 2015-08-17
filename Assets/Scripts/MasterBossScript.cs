@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MasterScript : MonoBehaviour
+public class MasterBossScript : MonoBehaviour
 {
 
-    public GameObject enemyPrefab;
+//    public GameObject enemyPrefab;
     public CameraScript camera_script;
 
     public float left, top, right, bottom;
@@ -14,10 +14,11 @@ public class MasterScript : MonoBehaviour
     public float create_enemy_delay = 0.7f;
     public int max_enemies = 30;
 
-    public Text score_text;
-    public Text countdown_text;
+  /*  public Text score_text;
     private int score;
     public int score_max = 500;
+    */
+    public Text countdown_text;
     public int countdown_start = 30;
     private int countdown;
     private int my_level;
@@ -32,16 +33,15 @@ public class MasterScript : MonoBehaviour
         right = InterestingGameStuff.right;
         bottom = InterestingGameStuff.bottom;
 
-        InvokeRepeating("RotateEnemies", 0, 0.02f);
+/*        InvokeRepeating("RotateEnemies", 0, 0.02f);
         InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
         UpdateScoreText();
         countdown = countdown_start;
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
-        my_level = InterestingGameStuff.level;
-
         score_max += (score_max / 10) * my_level;
-        UpdateScoreText();
+        UpdateScoreText();*/
+        my_level = InterestingGameStuff.level;
 
         // change background image
         GameObject bg = GameObject.Find("/Background");
@@ -65,66 +65,6 @@ public class MasterScript : MonoBehaviour
                 script.randomRotationVector();
             }
         }
-    }
-
-    void CreateRandomEnemy()
-    {
-        // limit active enemies number
-        int counter = 0;
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            EnemyScript script = obj.GetComponent<EnemyScript>();
-            if (!script || script.IsShitted()) continue;
-            counter++;
-        }
-        if (counter >= max_enemies)
-        {
-            return;
-        }
-
-        Vector3 new_pos = Vector3.zero;
-        switch (Random.Range(0, 4))
-        {
-            // position in one of edges of screen
-            case 0:
-                new_pos.x = left;
-                new_pos.y = top + (bottom - top) * Random.value;
-                break;
-            case 1:
-                new_pos.x = right;
-                new_pos.y = top + (bottom - top) * Random.value;
-                break;
-            case 2:
-                new_pos.x = left + (right - left) * Random.value;
-                new_pos.y = top;
-                break;
-            case 3:
-                new_pos.x = left + (right - left) * Random.value;
-                new_pos.y = bottom;
-                break;
-        }
-
-        GameObject new_enemy = Instantiate(enemyPrefab, new_pos, Quaternion.identity) as GameObject;
-        // call Initialize
-        new_enemy.GetComponent<EnemyScript>().Initialize(my_level, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
-        new_enemy.transform.Rotate(new Vector3(0, 0, Random.value * 360));
-    }
-
-    void ScoreUp(int howmuch = 1)
-    {
-        score += howmuch;
-        UpdateScoreText();
-
-        // end level?
-        if (score >= score_max)
-        {
-            StartCoroutine("FinishLevel");
-        }
-    }
-
-    void UpdateScoreText()
-    {
-        score_text.text = "Score: " + score + "/" + score_max;
     }
 
     void UpdateCountdownText()
