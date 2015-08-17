@@ -10,8 +10,9 @@ public class BossScript : MonoBehaviour
     private StateBehavior behavior;
 
     public float rotation_speed_normal = 30.0f;
-    public float rotation_speed_fire = 360.0f;
+    public float rotation_speed_fire = 180.0f;
     public float goto_speed = 0.8f;
+    public float random_behavior_max_time = 4.0f;
     public Vector3 sway_vector = new Vector3(-0.3f, -4, 0); // boss sways stupidly when idle
 
     private Vector3 target_vector; // rotate to face this
@@ -28,13 +29,7 @@ public class BossScript : MonoBehaviour
         transform.position = new_pos;
         goto_vector = new_pos;
 
-        rotation_speed = rotation_speed_normal;
-        target_vector = sway_vector;
-        // probably use time values in following Invoking in some setting or public variable
-        InvokeRepeating("SwitchHappyToRotation", 0.6f, 0.6f);
-        InvokeRepeating("RandomizeGoTo", 1.4f, 1.4f);
-        behavior += RotateHappily;
-        behavior += JumpToGoTo;
+        StartRegularBehavior();
     }
 
     void JumpToGoTo()
@@ -73,13 +68,40 @@ public class BossScript : MonoBehaviour
         DoRotation();
     }
 
-    void TestBehavior()
+    // boss starts dancing and will sometime shoot
+    void StartRegularBehavior()
     {
-        transform.localScale += new Vector3(0.1f * Time.fixedDeltaTime, 0, 0);
+        rotation_speed = rotation_speed_normal;
+        target_vector = sway_vector;
+        // probably use time values in following Invoking in some setting or public variable
+        InvokeRepeating("SwitchHappyToRotation", 0.6f, 0.6f);
+        InvokeRepeating("RandomizeGoTo", 1.4f, 1.4f);
+        Invoke("StartShooting", Random.value * random_behavior_max_time);
+        behavior = null;
+        behavior += RotateHappily;
+        behavior += JumpToGoTo;
     }
 
-    void RandomJump()
+    // Change the jumping behavior or whatever to SHOOTING tatatatata!
+    void StartShooting()
     {
+        CancelInvoke("SwitchHappyToRotation");
+        behavior = ShootingBehavior;
+        rotation_speed = rotation_speed_fire;
+        Vector3 new_target = transform.position;
+        new_target.x -= 5;
+        target_vector = new_target;
+        Invoke("StopShooting", Random.value * random_behavior_max_time);
+    }
+
+    void StopShooting()
+    {
+        StartRegularBehavior();
+    }
+
+    void ShootingBehavior()
+    {
+        DoRotation();
     }
 
     void FixedUpdate()
