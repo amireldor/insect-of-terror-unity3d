@@ -13,6 +13,7 @@ public class BossScript : MonoBehaviour
     public float rotation_speed_fire = 180.0f;
     public float goto_speed = 0.8f;
     public float random_behavior_max_time = 4.0f;
+    public float goto_change_time = 1.0f;
     public Vector3 sway_vector = new Vector3(-0.3f, -4, 0); // boss sways stupidly when idle
 
     private Vector3 target_vector; // rotate to face this
@@ -75,7 +76,7 @@ public class BossScript : MonoBehaviour
         target_vector = sway_vector;
         // probably use time values in following Invoking in some setting or public variable
         InvokeRepeating("SwitchHappyToRotation", 0.6f, 0.6f);
-        InvokeRepeating("RandomizeGoTo", 1.4f, 1.4f);
+        InvokeRepeating("RandomizeGoTo", goto_change_time, goto_change_time);
         Invoke("StartShooting", Random.value * random_behavior_max_time);
         behavior = null;
         behavior += RotateHappily;
