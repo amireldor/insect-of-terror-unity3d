@@ -53,7 +53,7 @@ public class BossScript : MonoBehaviour
         right = InterestingGameStuff.right;
         bottom = InterestingGameStuff.bottom;
 
-        goto_vector = new Vector3(right - ((right - left) * 0.2f), top + Random.value * (bottom - top), 0);
+        goto_vector = new Vector3(right - Random.value * ((right - left) * 0.4f), top + Random.value * (bottom - top), 0);
     }
 
     // switch the to_rotation, not the happiness into a rotation
@@ -90,7 +90,7 @@ public class BossScript : MonoBehaviour
         rotation_speed = rotation_speed_fire;
         Vector3 new_target = transform.position;
         new_target.x -= 5;
-        target_vector = new_target;
+        target_vector = new Vector3(-5, 0 , 0);
         Invoke("StopShooting", Random.value * random_behavior_max_time);
     }
 
