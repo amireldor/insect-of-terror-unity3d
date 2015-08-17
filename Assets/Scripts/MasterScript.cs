@@ -27,6 +27,8 @@ public class MasterScript : MonoBehaviour
     private int countdown;
     private int my_level;
 
+    private bool finish_started = false;
+
     // Use this for initialization
     void Start()
     {
@@ -115,8 +117,7 @@ public class MasterScript : MonoBehaviour
         // end level?
         if (score >= score_max)
         {
-            InterestingGameStuff.level++;
-            Application.LoadLevel("level");
+            StartCoroutine("FinishLevel");
         }
     }
 
@@ -139,6 +140,28 @@ public class MasterScript : MonoBehaviour
             // level over
         }
         UpdateCountdownText();
+    }
+
+    // note! I had a bug when this was in `Start` (where it shouldn't be). Probably `twirl` on camera_script was not yet set up.
+    public IEnumerator FinishLevel()
+    {
+        // collect 'bunos' time
+        // show cool stuff
+        // only do this once
+        if (!finish_started)
+        {
+            finish_started = true;
+            yield return StartCoroutine(camera_script.TwirlUp());
+            yield return StartCoroutine("_FinalAction");
+        }
+    }
+
+    // Final commands to invoke when finishing level, called in `FinishLevel`
+    IEnumerator _FinalAction()
+    {
+        Application.LoadLevel("level");
+        InterestingGameStuff.level++;
+        yield return null;
     }
 
     // Update is called once per frame
