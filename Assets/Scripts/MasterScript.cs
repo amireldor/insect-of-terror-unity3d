@@ -7,14 +7,15 @@ public static class InterestingGameStuff
     public static int level = 0;
 }
 
-public class MasterScript : MonoBehaviour {
+public class MasterScript : MonoBehaviour
+{
 
-	public GameObject enemyPrefab;
+    public GameObject enemyPrefab;
     public CameraScript camera_script;
 
-	public float left, top, right, bottom;
-	public float enemy_rotation_speed;
-	public float enemy_speed;
+    public float left, top, right, bottom;
+    public float enemy_rotation_speed;
+    public float enemy_speed;
     public float create_enemy_delay = 0.7f;
     public int max_enemies = 30;
 
@@ -26,9 +27,10 @@ public class MasterScript : MonoBehaviour {
     private int countdown;
     private int my_level;
 
-	// Use this for initialization
-	void Start () {
-		InvokeRepeating ("RotateEnemies", 0, 0.02f);
+    // Use this for initialization
+    void Start()
+    {
+        InvokeRepeating("RotateEnemies", 0, 0.02f);
         InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
         UpdateScoreText();
         countdown = countdown_start;
@@ -43,21 +45,24 @@ public class MasterScript : MonoBehaviour {
         SpriteRenderer bg_renderer = bg.GetComponent<SpriteRenderer>();
         Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
         bg_renderer.sprite = bg_sprite;
-	}
+    }
 
-	/// <summary>
-	/// Iterates through enemies and changes their rotationVector,
-	/// for an awesome wiggly moving effect.
-	/// </summary>
-	void RotateEnemies() {
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-		foreach (GameObject enemy in enemies) {
-			EnemyScript script = enemy.GetComponent<EnemyScript>();
-			if (script) { // for some reason it was null on game very start, so ignore if null
-				script.randomRotationVector();
-			}
-		}
-	}
+    /// <summary>
+    /// Iterates through enemies and changes their rotationVector,
+    /// for an awesome wiggly moving effect.
+    /// </summary>
+    void RotateEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            EnemyScript script = enemy.GetComponent<EnemyScript>();
+            if (script)
+            { // for some reason it was null on game very start, so ignore if null
+                script.randomRotationVector();
+            }
+        }
+    }
 
     void CreateRandomEnemy()
     {
@@ -106,7 +111,7 @@ public class MasterScript : MonoBehaviour {
     {
         score += howmuch;
         UpdateScoreText();
-        
+
         // end level?
         if (score >= score_max)
         {
@@ -136,8 +141,9 @@ public class MasterScript : MonoBehaviour {
         UpdateCountdownText();
     }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
