@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossScript : MonoBehaviour
+public class BossScript : BaseBoss
 {
     // not sure if this is the way to go, because there are animator state machines and stuff...
     // but they don't seem to fit
@@ -20,8 +20,8 @@ public class BossScript : MonoBehaviour
     private Vector3 goto_vector; // go to this position
     private float rotation_speed;
 
-    // Use this for initialization
-    void Start()
+    // called automatically on `Start`
+    override protected void Initialize()
     {
         Vector3 new_pos = new Vector3();
         new_pos.x = InterestingGameStuff.right - 1.0f;
@@ -48,12 +48,6 @@ public class BossScript : MonoBehaviour
 
     void RandomizeGoTo()
     {
-        float left, top, right, bottom; // for easy shit (HA!)
-        left = InterestingGameStuff.left;
-        top = InterestingGameStuff.top;
-        right = InterestingGameStuff.right;
-        bottom = InterestingGameStuff.bottom;
-
         goto_vector = new Vector3(right - Random.value * ((right - left) * 0.4f), top + Random.value * (bottom - top), 0);
     }
 
