@@ -10,9 +10,14 @@ public class BossEnemy : MonoBehaviour {
     private int level;
     private float speed;
 
+    protected float left, top, right, bottom; // for easy shit (HA!)
+
 	// Use this for initialization
 	void Start () {
-	
+        left = InterestingGameStuff.left;
+        top = InterestingGameStuff.top;
+        right = InterestingGameStuff.right;
+        bottom = InterestingGameStuff.bottom;
 	}
 
     public void Initialize(int level_in, float speed_in)
@@ -24,8 +29,15 @@ public class BossEnemy : MonoBehaviour {
         speed = speed_in;
     }
 
-	// Update is called once per frame
-	void Update () {
-        transform.Rotate(new Vector3(0, 0, 100 * Time.deltaTime));
+	void FixedUpdate () {
+        transform.position += transform.up * speed * Time.fixedDeltaTime;
+
+        if (transform.position.x < left ||
+            transform.position.y < top ||
+            transform.position.x > right ||
+            transform.position.y > bottom)
+        {
+            Destroy(this.gameObject);
+        }
 	}
 }

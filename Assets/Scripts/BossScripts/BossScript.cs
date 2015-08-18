@@ -17,6 +17,7 @@ public class BossScript : BaseBoss
     public float random_behavior_max_time = 4.0f;
     public float goto_change_time = 1.0f;
     public float fire_rate = 0.24f;
+    public float enemy_speed = 5.0f;
     public Vector3 sway_vector = new Vector3(-0.3f, -4, 0); // boss sways stupidly when idle
 
     private Vector3 target_vector; // rotate to face this
@@ -90,7 +91,7 @@ public class BossScript : BaseBoss
         new_target.x -= 5;
         target_vector = new Vector3(-5, 0 , 0);
         Invoke("StopShooting", Random.value * random_behavior_max_time);
-        InvokeRepeating("ShootEnemy", 0.0f, fire_rate);
+        InvokeRepeating("ShootEnemy", 0.42f, fire_rate);
     }
 
     void ShootEnemy()
@@ -99,7 +100,7 @@ public class BossScript : BaseBoss
         new_pos.x -= transform.localScale.x / 2.0f;
         GameObject new_enemy = Instantiate(enemy_prefab, new_pos, Quaternion.identity) as GameObject;
        // new_enemy.GetComponent<EnemyScript>().Initialize(level, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
-        new_enemy.GetComponent<BossEnemy>().Initialize(InterestingGameStuff.level+1, 10.0f);
+        new_enemy.GetComponent<BossEnemy>().Initialize(InterestingGameStuff.level, enemy_speed);
         new_enemy.transform.Rotate(new Vector3(0, 0, 90.0f));
     }
 
