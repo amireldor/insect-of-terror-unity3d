@@ -48,6 +48,14 @@ public class MasterBossScript : MonoBehaviour
         SpriteRenderer bg_renderer = bg.GetComponent<SpriteRenderer>();
         Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
         bg_renderer.sprite = bg_sprite;
+
+        /*
+        // Example code: start differnet boss script:
+        GameObject boss = GameObject.Find("/Boss");
+        Destroy(boss.GetComponent<BossScript>());
+        var new_script = boss.AddComponent<Boss2Script>();
+        new_script.start_after = 0.4f;
+        */
     }
 
     /// <summary>
