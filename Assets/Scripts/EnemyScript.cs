@@ -30,11 +30,9 @@ public class EnemyScript : MonoBehaviour
     /// <param name="level">Level.</param>
     public void Initialize(int level, float rotation_speed_in, float speed_in, float left_in, float top_in, float right_in, float bottom_in)
     {
-        Sprite[] sprites = Resources.LoadAll<Sprite>("enemies");
         SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
-        level = Mathf.Clamp(level, 0, sprites.Length - 1);
-        sprite_renderer.sprite = sprites[level];
-        final_sprite = sprites[level + 10]; // pooped-upon sprite
+        sprite_renderer.sprite = InterestingGameStuff.FindEnemySprite(level);
+        final_sprite = InterestingGameStuff.FindEnemySprite(level, true); // pooped-upon sprite
 
         rotation_speed = rotation_speed_in;
         speed = speed_in;

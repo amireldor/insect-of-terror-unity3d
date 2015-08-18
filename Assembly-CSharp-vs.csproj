@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BossEnemy.cs" />
      <Compile Include="Assets\Scripts\AssScript.cs" />
+     <Compile Include="Assets\Scripts\BossEnemy.cs" />
      <Compile Include="Assets\Scripts\BossScripts\BaseBoss.cs" />
      <Compile Include="Assets\Scripts\BossScripts\Boss2Script.cs" />
      <Compile Include="Assets\Scripts\BossScripts\BossScript.cs" />
