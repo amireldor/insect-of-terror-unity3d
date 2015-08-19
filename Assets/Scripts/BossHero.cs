@@ -8,6 +8,7 @@ using System.Collections;
 public class BossHero : MonoBehaviour {
 
     public float get_up_delay = 1.2f;
+    public float speed = 1.0f;
 
     private float top, bottom;
     private bool fallen = false;
@@ -21,10 +22,13 @@ public class BossHero : MonoBehaviour {
         transform.position = new_pos;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        Debug.DrawRay(transform.position, new Vector3(1, 1,0));
-        Debug.DrawRay(transform.position, Vector3.up * 5);
+	void FixedUpdate () {
+        if (!fallen)
+        {
+            Vector3 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouse_pos.z = 0;
+            transform.position = Vector3.MoveTowards(transform.position, mouse_pos, speed * Time.fixedDeltaTime);
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D collider)
