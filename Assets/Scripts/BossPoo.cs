@@ -30,5 +30,10 @@ public class BossPoo : MonoBehaviour
         }
 
         transform.position += movement * Time.fixedDeltaTime;
+
+        if (transform.position.x > InterestingGameStuff.right)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
