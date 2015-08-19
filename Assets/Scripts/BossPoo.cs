@@ -28,6 +28,10 @@ public class BossPoo : MonoBehaviour
             hit.collider.gameObject.SendMessage("Pooed");
             Destroy(this.gameObject);
         }
+        else if (hit.collider.tag == "Powerup")
+        {
+            hit.collider.gameObject.GetComponent<PowerupScript>().ApplyPowerup();
+        }
 
         transform.position += movement * Time.fixedDeltaTime;
 

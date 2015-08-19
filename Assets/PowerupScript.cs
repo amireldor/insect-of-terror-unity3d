@@ -79,8 +79,6 @@ public class PowerupScript : MonoBehaviour
 
         SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
         sprite_renderer.sprite = sprite;
-
-        //powerup_action();
     }
 
     void FixedUpdate()
@@ -90,6 +88,12 @@ public class PowerupScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void ApplyPowerup()
+    {
+        powerup_action();
+        Destroy(this.gameObject);
     }
 
     void ApplyRifle()
