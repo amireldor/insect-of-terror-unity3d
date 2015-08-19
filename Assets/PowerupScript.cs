@@ -18,6 +18,9 @@ public class PowerupScript : MonoBehaviour
     Powerup type;
     Sprite sprite;
 
+    delegate void PowerupAction();
+    PowerupAction powerup_action = null;
+
     // Use this for initialization
     void Start()
     {
@@ -56,22 +59,28 @@ public class PowerupScript : MonoBehaviour
             type = type_in;
         }
 
+        // set powerup specific view + behavior here
         Sprite[]  sprites = Resources.LoadAll<Sprite>("items");
         switch (type)
         {
             case Powerup.Rifle:
                 sprite = sprites[1];
+                powerup_action = ApplyRifle;
                 break;
             case Powerup.Time:
                 sprite = sprites[2];
+                powerup_action = ApplyRifle;
                 break;
             case Powerup.Bomb:
                 sprite = sprites[3];
+                powerup_action = ApplyRifle;
                 break;
         }
 
         SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
         sprite_renderer.sprite = sprite;
+
+        //powerup_action();
     }
 
     void FixedUpdate()
@@ -81,5 +90,11 @@ public class PowerupScript : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    void ApplyRifle()
+    {
+        GameObject hero = GameObject.Find("/Hero");
+        hero.GetComponent<BossHero>().UpgradeWeapon();
     }
 }

@@ -11,6 +11,8 @@ public class BossHero : MonoBehaviour {
     public float speed = 1.0f;
     public float fire_delay = 0.2f;
     public float poo_speed = 1.4f;
+    public float orig_fire_delay;
+    public float orig_poo_speed;
 
     public GameObject poo_prefab;
 
@@ -23,6 +25,9 @@ public class BossHero : MonoBehaviour {
         my_sprite = GetComponent<SpriteRenderer>().sprite;
         Vector3 new_pos = new Vector3(InterestingGameStuff.left + my_sprite.bounds.size.x / 2.0f, 0, 0);
         transform.position = new_pos;
+
+        orig_fire_delay = fire_delay;
+        orig_poo_speed = poo_speed;
 	}
 	
 	void FixedUpdate () {
@@ -87,5 +92,23 @@ public class BossHero : MonoBehaviour {
         script.Initialize(poo_speed);
 
         new_poo.transform.position += new Vector3(my_sprite.bounds.size.x / 2.0f, 0, 0);
+    }
+
+    public void UpgradeWeapon()
+    {
+        fire_delay = orig_fire_delay;
+        fire_delay *= 0.2f;
+        poo_speed = orig_poo_speed;
+        poo_speed *= 1.3f;
+
+        const float howlong = 2.0f;
+        CancelInvoke("DowngradeWeapon");
+        Invoke("DowngradeWeapon", howlong);
+    }
+
+    void DowngradeWeapon()
+    {
+        fire_delay = orig_fire_delay;
+        poo_speed = orig_poo_speed;
     }
 }
