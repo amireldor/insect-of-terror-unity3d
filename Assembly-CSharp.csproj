@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PowerupScript.cs" />
      <Compile Include="Assets\Scripts\AssScript.cs" />
      <Compile Include="Assets\Scripts\BossEnemy.cs" />
      <Compile Include="Assets\Scripts\BossHero.cs" />
@@ -60,6 +59,7 @@
      <Compile Include="Assets\Scripts\MasterBossScript.cs" />
      <Compile Include="Assets\Scripts\MasterScript.cs" />
      <Compile Include="Assets\Scripts\PooScript.cs" />
+     <Compile Include="Assets\Scripts\PowerupScript.cs" />
      <Compile Include="Assets\Scripts\SharedScript.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
