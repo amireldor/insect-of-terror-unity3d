@@ -7,6 +7,9 @@ public class MasterBossScript : MonoBehaviour
 
     public CameraScript camera_script;
 
+    public GameObject powerup_prefab;
+    public float powerup_max_delay = 5.0f;
+
     public float left, top, right, bottom;
     public float enemy_rotation_speed;
     public float enemy_speed;
@@ -45,6 +48,7 @@ public class MasterBossScript : MonoBehaviour
         var new_script = boss.AddComponent<Boss2Script>();
         new_script.start_after = 0.4f;
         */
+        StartCoroutine("PowerupCoroutine");
     }
 
     public void BunosTime(int howmuch = 3)
@@ -98,6 +102,21 @@ public class MasterBossScript : MonoBehaviour
         Application.LoadLevel("level");
         InterestingGameStuff.level++;
         yield return null;
+    }
+
+    IEnumerator PowerupCoroutine()
+    {
+        while (true)
+        {
+            // wait for it...
+            yield return new WaitForSeconds(Random.value * powerup_max_delay);
+
+            // create the powerup!
+            Vector3 random_position = Vector3.zero;
+            random_position.x = left + Random.value * (right - left);
+            random_position.y = top + Random.value * (bottom - top);
+            Instantiate(powerup_prefab, random_position, Quaternion.identity);
+        }
     }
 
 }
