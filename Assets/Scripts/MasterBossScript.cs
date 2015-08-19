@@ -47,26 +47,15 @@ public class MasterBossScript : MonoBehaviour
         */
     }
 
-    /// <summary>
-    /// Iterates through enemies and changes their rotationVector,
-    /// for an awesome wiggly moving effect.
-    /// </summary>
-    void RotateEnemies()
+    public void BunosTime(int howmuch = 3)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            EnemyScript script = enemy.GetComponent<EnemyScript>();
-            if (script)
-            { // for some reason it was null on game very start, so ignore if null
-                script.randomRotationVector();
-            }
-        }
+        countdown += howmuch;
+        UpdateCountdownText();
     }
 
     void UpdateCountdownText()
     {
-        countdown_text.text = "Time: " + countdown;
+        countdown_text.text = "Time left: " + countdown;
     }
 
     void CountdownBeat()
@@ -102,9 +91,4 @@ public class MasterBossScript : MonoBehaviour
         yield return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

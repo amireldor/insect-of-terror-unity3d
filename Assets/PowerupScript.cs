@@ -59,6 +59,8 @@ public class PowerupScript : MonoBehaviour
             type = type_in;
         }
 
+        type = Powerup.Time;
+
         // set powerup specific view + behavior here
         Sprite[]  sprites = Resources.LoadAll<Sprite>("items");
         switch (type)
@@ -69,7 +71,7 @@ public class PowerupScript : MonoBehaviour
                 break;
             case Powerup.Time:
                 sprite = sprites[2];
-                powerup_action = ApplyRifle;
+                powerup_action = ApplyTime;
                 break;
             case Powerup.Bomb:
                 sprite = sprites[3];
@@ -100,5 +102,11 @@ public class PowerupScript : MonoBehaviour
     {
         GameObject hero = GameObject.Find("/Hero");
         hero.GetComponent<BossHero>().UpgradeWeapon();
+    }
+
+    void ApplyTime()
+    {
+        GameObject master = GameObject.Find("/MasterBossObject");
+        master.GetComponent<MasterBossScript>().BunosTime();
     }
 }
