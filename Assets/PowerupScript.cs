@@ -7,6 +7,17 @@ public class PowerupScript : MonoBehaviour
 
     private Vector3 target;
 
+    public enum Powerup
+    {
+        Random,
+        Rifle,
+        Time,
+        Bomb,
+    }
+
+    Powerup type;
+    Sprite sprite;
+
     // Use this for initialization
     void Start()
     {
@@ -20,6 +31,47 @@ public class PowerupScript : MonoBehaviour
         float vertical = top + Random.value * (bottom - top);
 
         target = new Vector3(horizontal, vertical);
+        Initialize();
+    }
+
+    public void Initialize(Powerup type_in = Powerup.Random)
+    {
+        if (type_in == Powerup.Random)
+        {
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    type = Powerup.Rifle;
+                    break;
+                case 1:
+                    type = Powerup.Time;
+                    break;
+                case 2:
+                    type = Powerup.Bomb;
+                    break;
+            }
+        }
+        else
+        {
+            type = type_in;
+        }
+
+        Sprite[]  sprites = Resources.LoadAll<Sprite>("items");
+        switch (type)
+        {
+            case Powerup.Rifle:
+                sprite = sprites[1];
+                break;
+            case Powerup.Time:
+                sprite = sprites[2];
+                break;
+            case Powerup.Bomb:
+                sprite = sprites[3];
+                break;
+        }
+
+        SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
+        sprite_renderer.sprite = sprite;
     }
 
     void FixedUpdate()
