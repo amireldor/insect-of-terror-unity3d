@@ -16,9 +16,10 @@ public class BossScript : BaseBoss
     public float goto_speed = 0.8f;
     public float random_behavior_max_time = 4.0f;
     public float goto_change_time = 1.0f;
-    public float fire_rate = 0.24f;
+    public float fire_delay = 0.24f;
     public float enemy_speed = 5.0f;
     public Vector3 sway_vector = new Vector3(-0.3f, -4, 0); // boss sways stupidly when idle
+    public float enemy_offset = 0.6f;
 
     private Vector3 target_vector; // rotate to face this
     private Vector3 goto_vector; // go to this position
@@ -39,7 +40,7 @@ public class BossScript : BaseBoss
 
     void JumpToGoTo()
     {
-        transform.position = Vector3.Slerp(transform.position, goto_vector, goto_speed * Time.fixedDeltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, goto_vector, goto_speed * Time.fixedDeltaTime);
     }
 
     void DoRotation()
@@ -91,7 +92,7 @@ public class BossScript : BaseBoss
         new_target.x -= 5;
         target_vector = new Vector3(-5, 0 , 0);
         Invoke("StopShooting", Random.value * random_behavior_max_time);
-        InvokeRepeating("ShootEnemy", 0.42f, fire_rate);
+        InvokeRepeating("ShootEnemy", 0.42f, fire_delay);
     }
 
     void ShootEnemy()
@@ -99,9 +100,11 @@ public class BossScript : BaseBoss
         Vector3 new_pos = transform.position;
         new_pos.x -= transform.localScale.x / 2.0f;
         GameObject new_enemy = Instantiate(enemy_prefab, new_pos, Quaternion.identity) as GameObject;
-       // new_enemy.GetComponent<EnemyScript>().Initialize(level, enemy_rotation_speed, enemy_speed, left, top, right, bottom);
         new_enemy.GetComponent<BossEnemy>().Initialize(InterestingGameStuff.level, enemy_speed);
-        new_enemy.transform.Rotate(new Vector3(0, 0, 90.0f));
+        Quaternion new_rotation = Quaternion.LookRotation(new Vector3(5, -enemy_offset + Random.value * enemy_offset * 2, 0), Vector3.forward);
+        new_rotation.x = new_rotation.y = 0;
+        new_enemy.transform.rotation = new_rotation;
+        //new_enemy.transform.Rotate(new Vector3(0, 0, 90.0f));
     }
 
     void StopShooting()
