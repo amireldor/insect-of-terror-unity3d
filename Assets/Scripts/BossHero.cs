@@ -7,7 +7,10 @@ using System.Collections;
 
 public class BossHero : MonoBehaviour {
 
-    float top, bottom;
+    public float get_up_delay = 1.2f;
+
+    private float top, bottom;
+    private bool fallen = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,34 @@ public class BossHero : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector3(0, 0, 20.0f * Time.deltaTime));
+        Debug.DrawRay(transform.position, new Vector3(1, 1,0));
+        Debug.DrawRay(transform.position, Vector3.up * 5);
 	}
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Enemy")
+        {
+            FallDown();
+        }
+    }
+
+    // Goes into 'paralyzed' fallen down state, invokes a delayed 'get up' functions
+    void FallDown()
+    {
+        fallen = true;
+
+        Quaternion new_rot = Quaternion.LookRotation(new Vector3(5, 0, 0), Vector3.forward);
+        new_rot.x = new_rot.y = 0.0f;
+        transform.rotation = new_rot;
+
+        CancelInvoke("GetUp"); // start fresh!
+        Invoke("GetUp", get_up_delay);
+    }
+
+    void GetUp()
+    {
+        fallen = false;
+        transform.rotation = Quaternion.identity;
+    }
 }
