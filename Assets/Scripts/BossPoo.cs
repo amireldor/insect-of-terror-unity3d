@@ -22,13 +22,11 @@ public class BossPoo : MonoBehaviour
     {
         Vector3 movement = new Vector3(1, 0, 0) * speed;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, movement.normalized, movement.magnitude);
-        foreach (var hit in hits)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement.normalized, movement.magnitude);
+        if (hit.collider.tag == "Enemy")
         {
-            if (hit.collider.tag == "Enemy")
-            {
-                Destroy(this.gameObject);
-            }
+            hit.collider.gameObject.SendMessage("Pooed");
+            Destroy(this.gameObject);
         }
 
         transform.position += movement * Time.fixedDeltaTime;

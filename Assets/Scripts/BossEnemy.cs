@@ -7,9 +7,12 @@ using System.Collections;
 
 public class BossEnemy : MonoBehaviour {
 
+    public float gravity_force = 1.0f;
+
     private int level;
     private float speed;
 
+    private bool pooed = false;
     protected float left, top, right, bottom; // for easy shit (HA!)
 
 	// Use this for initialization
@@ -30,7 +33,15 @@ public class BossEnemy : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-        transform.position += transform.up * speed * Time.fixedDeltaTime;
+        if (!pooed)
+        {
+            transform.position += transform.up * speed * Time.fixedDeltaTime;
+        }
+        else
+        {
+            transform.position += new Vector3(0, gravity_force, 0) * Time.fixedDeltaTime;
+            transform.Rotate(new Vector3(0, 0, 360.0f * 3 * Time.fixedDeltaTime));
+        }
 
         if (transform.position.x < left ||
             transform.position.y < top ||
@@ -40,4 +51,13 @@ public class BossEnemy : MonoBehaviour {
             Destroy(this.gameObject);
         }
 	}
+
+    void Pooed()
+    {
+        if (pooed) return;
+        pooed = true;
+        // change to pooped-upon sprite
+        SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
+        sprite_renderer.sprite = InterestingGameStuff.FindEnemySprite(level, true);
+    }
 }

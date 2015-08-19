@@ -14,15 +14,13 @@ public class BossHero : MonoBehaviour {
 
     public GameObject poo_prefab;
 
-    private float top, bottom;
     private bool fallen = false;
     private bool allow_fire = true;
+    private Sprite my_sprite;
 
 	// Use this for initialization
 	void Start () {
-        top = InterestingGameStuff.top;
-        bottom = InterestingGameStuff.bottom;
-        Sprite my_sprite = GetComponent<SpriteRenderer>().sprite;
+        my_sprite = GetComponent<SpriteRenderer>().sprite;
         Vector3 new_pos = new Vector3(InterestingGameStuff.left + my_sprite.bounds.size.x / 2.0f, 0, 0);
         transform.position = new_pos;
 	}
@@ -73,7 +71,7 @@ public class BossHero : MonoBehaviour {
 
     IEnumerator Fire()
     {
-        if (allow_fire)
+        if (allow_fire && !fallen)
         {
             allow_fire = false;
             SpawnPoo();
@@ -87,5 +85,7 @@ public class BossHero : MonoBehaviour {
         GameObject new_poo = Instantiate(poo_prefab, transform.position, Quaternion.identity) as GameObject;
         BossPoo script = new_poo.GetComponent<BossPoo>();
         script.Initialize(poo_speed);
+
+        new_poo.transform.position += new Vector3(my_sprite.bounds.size.x / 2.0f, 0, 0);
     }
 }
