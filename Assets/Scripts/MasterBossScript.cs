@@ -5,7 +5,6 @@ using System.Collections;
 public class MasterBossScript : MonoBehaviour
 {
 
-//    public GameObject enemyPrefab;
     public CameraScript camera_script;
 
     public float left, top, right, bottom;
@@ -14,13 +13,9 @@ public class MasterBossScript : MonoBehaviour
     public float create_enemy_delay = 0.7f;
     public int max_enemies = 30;
 
-  /*  public Text score_text;
-    private int score;
-    public int score_max = 500;
-    */
     public Text countdown_text;
-    public int countdown_start = 30;
-    private int countdown;
+    public int countdown = 50;
+
     private int my_level;
 
     private bool finish_started = false;
@@ -33,14 +28,8 @@ public class MasterBossScript : MonoBehaviour
         right = InterestingGameStuff.right;
         bottom = InterestingGameStuff.bottom;
 
-/*        InvokeRepeating("RotateEnemies", 0, 0.02f);
-        InvokeRepeating("CreateRandomEnemy", 0, create_enemy_delay);
-        UpdateScoreText();
-        countdown = countdown_start;
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
-        score_max += (score_max / 10) * my_level;
-        UpdateScoreText();*/
         my_level = InterestingGameStuff.level;
 
         // change background image

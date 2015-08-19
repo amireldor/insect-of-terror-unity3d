@@ -48,6 +48,7 @@ public class MasterScript : MonoBehaviour
         SpriteRenderer bg_renderer = bg.GetComponent<SpriteRenderer>();
         Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
         bg_renderer.sprite = bg_sprite;
+
     }
 
     /// <summary>
