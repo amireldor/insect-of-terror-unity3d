@@ -5,11 +5,15 @@
 	do something that looks like a level, reach boss
 
 # phase 1.2, boss
-turning boss shooting jukim
+	turning boss shooting jukim
 purple men, think how 2 or how both sides, maybe boss not in middle?
 purple men falling funnily
 bonuses
 
 # phase 1.4
 sounds
+more bosses scripts
+maybe change scoring quantities
+
+#phase 2
 balance game
