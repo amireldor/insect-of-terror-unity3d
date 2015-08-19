@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\AssScript.cs" />
     <Compile Include="Assets\Scripts\BossEnemy.cs" />
     <Compile Include="Assets\Scripts\BossHero.cs" />
+    <Compile Include="Assets\Scripts\BossPoo.cs" />
     <Compile Include="Assets\Scripts\BossScripts\BaseBoss.cs" />
     <Compile Include="Assets\Scripts\BossScripts\Boss2Script.cs" />
     <Compile Include="Assets\Scripts\BossScripts\BossScript.cs" />

@@ -9,9 +9,13 @@ public class BossHero : MonoBehaviour {
 
     public float get_up_delay = 1.2f;
     public float speed = 1.0f;
+    public float fire_delay = 0.2f;
+
+    public GameObject poo_prefab;
 
     private float top, bottom;
     private bool fallen = false;
+    private bool allow_fire = true;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +34,14 @@ public class BossHero : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, mouse_pos, speed * Time.fixedDeltaTime);
         }
 	}
+
+    void Update()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            StartCoroutine("Fire");
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -56,5 +68,21 @@ public class BossHero : MonoBehaviour {
     {
         fallen = false;
         transform.rotation = Quaternion.identity;
+    }
+
+    IEnumerator Fire()
+    {
+        if (allow_fire)
+        {
+            allow_fire = false;
+            SpawnPoo();
+            yield return new WaitForSeconds(fire_delay);
+            allow_fire = true;
+        }
+    }
+
+    void SpawnPoo()
+    {
+        GameObject new_poo = Instantiate(poo_prefab, transform.position, Quaternion.identity) as GameObject;
     }
 }
