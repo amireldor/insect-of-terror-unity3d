@@ -10,6 +10,7 @@ public class BossHero : MonoBehaviour {
     public float get_up_delay = 1.2f;
     public float speed = 1.0f;
     public float fire_delay = 0.2f;
+    public float poo_speed = 1.4f;
 
     public GameObject poo_prefab;
 
@@ -84,5 +85,7 @@ public class BossHero : MonoBehaviour {
     void SpawnPoo()
     {
         GameObject new_poo = Instantiate(poo_prefab, transform.position, Quaternion.identity) as GameObject;
+        BossPoo script = new_poo.GetComponent<BossPoo>();
+        script.Initialize(poo_speed);
     }
 }

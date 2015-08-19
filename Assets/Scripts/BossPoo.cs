@@ -11,10 +11,16 @@ public class BossPoo : MonoBehaviour
     {
 
     }
+    
+    // call after instantiating
+    public void Initialize(float poo_speed)
+    {
+        speed = poo_speed;
+    }
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(1, 0, 0) * speed * Time.fixedDeltaTime;
+        Vector3 movement = new Vector3(1, 0, 0) * speed;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, movement.normalized, movement.magnitude);
         foreach (var hit in hits)
