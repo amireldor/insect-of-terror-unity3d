@@ -53,6 +53,15 @@ public class MasterBossScript : MonoBehaviour
         UpdateCountdownText();
     }
 
+    public void KillEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy") as GameObject[];
+        foreach (var enemy in enemies)
+        {
+            enemy.SendMessage("Pooed");
+        }
+    }
+
     void UpdateCountdownText()
     {
         countdown_text.text = "Time left: " + countdown;
