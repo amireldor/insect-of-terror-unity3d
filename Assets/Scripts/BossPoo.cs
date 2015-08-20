@@ -7,6 +7,8 @@ public class BossPoo : MonoBehaviour
     public float speed = 0.6f;
     public float rotation_speed = 195.0f;
 
+    public GameObject explosion_prefab;
+
     // Use this for initialization
     void Start()
     {
@@ -33,6 +35,11 @@ public class BossPoo : MonoBehaviour
         else if (hit.collider.tag == "Powerup")
         {
             hit.collider.gameObject.GetComponent<PowerupScript>().ApplyPowerup();
+        }
+        else if (hit.collider.tag == "Boss")
+        {
+            Instantiate(explosion_prefab, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
 
         transform.position += movement * Time.fixedDeltaTime;
