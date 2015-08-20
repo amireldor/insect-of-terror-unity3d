@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -76,7 +74,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PowerupScript.cs" />
     <Compile Include="Assets\Scripts\AssScript.cs" />
     <Compile Include="Assets\Scripts\BossEnemy.cs" />
     <Compile Include="Assets\Scripts\BossHero.cs" />
@@ -86,10 +83,12 @@
     <Compile Include="Assets\Scripts\BossScripts\BossScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\Explosion.cs" />
     <Compile Include="Assets\Scripts\LawnMowerScript.cs" />
     <Compile Include="Assets\Scripts\MasterBossScript.cs" />
     <Compile Include="Assets\Scripts\MasterScript.cs" />
     <Compile Include="Assets\Scripts\PooScript.cs" />
+    <Compile Include="Assets\Scripts\PowerupScript.cs" />
     <Compile Include="Assets\Scripts\SharedScript.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +168,6 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="sortofTODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

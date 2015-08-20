@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\BossScripts\BossScript.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\Explosion.cs" />
      <Compile Include="Assets\Scripts\LawnMowerScript.cs" />
      <Compile Include="Assets\Scripts\MasterBossScript.cs" />
      <Compile Include="Assets\Scripts\MasterScript.cs" />
