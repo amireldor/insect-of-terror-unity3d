@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class BossScript : BaseBoss
 {
@@ -11,7 +10,6 @@ public class BossScript : BaseBoss
     private StateBehavior behavior;
 
     public GameObject enemy_prefab;
-    public Text health_text;
 
 
     public float rotation_speed_normal = 30.0f;
@@ -23,7 +21,6 @@ public class BossScript : BaseBoss
     public float enemy_speed = 5.0f;
     public Vector3 sway_vector = new Vector3(-0.3f, -4, 0); // boss sways stupidly when idle
     public float enemy_offset = 0.6f;
-    public float health = 100.0f;
 
     private Vector3 target_vector; // rotate to face this
     private Vector3 goto_vector; // go to this position
@@ -38,9 +35,9 @@ public class BossScript : BaseBoss
         new_pos.z = 0;
         transform.position = new_pos;
         goto_vector = new_pos;
+        health = 100.0f + 20.0f * InterestingGameStuff.level;
 
         StartRegularBehavior();
-
         UpdateHealthText();
     }
 
@@ -129,9 +126,4 @@ public class BossScript : BaseBoss
         behavior();
     }
 
-    void UpdateHealthText()
-    {
-        int i_health = (int) Mathf.Ceil(health);
-        health_text.text = "BOSS HEALTH: " + i_health;
-    }
 }

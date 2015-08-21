@@ -38,6 +38,7 @@ public class BossPoo : MonoBehaviour
         }
         else if (hit.collider.tag == "Boss")
         {
+            hit.collider.GetComponent<BaseBoss>().LowerHealth();
             Instantiate(explosion_prefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
