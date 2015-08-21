@@ -32,6 +32,11 @@ public class BaseBoss : MonoBehaviour
 
     }
 
+    public void ResetHealth(float to = 100.0f)
+    {
+        health = to;
+    }
+
     public void LowerHealth(float howmuch = 3.0f)
     {
         health -= 3.0f;

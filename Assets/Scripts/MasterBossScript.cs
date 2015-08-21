@@ -6,6 +6,7 @@ public class MasterBossScript : MonoBehaviour
 {
 
     public CameraScript camera_script;
+    public Text health_text;
 
     public GameObject powerup_prefab;
     public float powerup_max_delay = 5.0f;
@@ -34,6 +35,7 @@ public class MasterBossScript : MonoBehaviour
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
         my_level = InterestingGameStuff.level;
+//        my_level = 1;
 
         // change background image
         GameObject bg = GameObject.Find("/Background");
@@ -41,13 +43,15 @@ public class MasterBossScript : MonoBehaviour
         Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
         bg_renderer.sprite = bg_sprite;
 
-        /*
+
         // Example code: start differnet boss script:
-        GameObject boss = GameObject.Find("/Boss");
+/*        GameObject boss = GameObject.Find("/Boss");
         Destroy(boss.GetComponent<BossScript>());
-        var new_script = boss.AddComponent<Boss2Script>();
-        new_script.start_after = 0.4f;
-        */
+        var new_script2 = boss.AddComponent<Boss2Script>();
+        new_script2.start_after = 0.4f;
+        boss.GetComponent<BaseBoss>().ResetHealth(100.0f + 30.0f * my_level);*/
+        GameObject boss = Instantiate(Resources.Load("Prefabs/Bosses/Boss" + my_level), Vector3.zero, Quaternion.identity) as GameObject;
+        boss.GetComponent<BaseBoss>().health_text = health_text;
         StartCoroutine("PowerupCoroutine");
     }
 

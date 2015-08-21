@@ -35,7 +35,8 @@ public class BossScript : BaseBoss
         new_pos.z = 0;
         transform.position = new_pos;
         goto_vector = new_pos;
-        health = 100.0f + 20.0f * InterestingGameStuff.level;
+
+        ResetHealth(100.0f + InterestingGameStuff.level * 30.0f);
 
         StartRegularBehavior();
         UpdateHealthText();
