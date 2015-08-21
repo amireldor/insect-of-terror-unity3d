@@ -35,7 +35,6 @@ public class MasterBossScript : MonoBehaviour
         UpdateCountdownText();
         InvokeRepeating("CountdownBeat", 1.0f, 1.0f);
         my_level = InterestingGameStuff.level;
-//        my_level = 1;
 
         // change background image
         GameObject bg = GameObject.Find("/Background");

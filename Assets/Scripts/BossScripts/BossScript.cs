@@ -25,6 +25,7 @@ public class BossScript : BaseBoss
     private Vector3 target_vector; // rotate to face this
     private Vector3 goto_vector; // go to this position
     private float rotation_speed;
+    private int my_level = 0;
 
     // called automatically on `Start`
     override protected void Initialize()
@@ -36,7 +37,8 @@ public class BossScript : BaseBoss
         transform.position = new_pos;
         goto_vector = new_pos;
 
-        ResetHealth(100.0f + InterestingGameStuff.level * 30.0f);
+        my_level = InterestingGameStuff.level;
+        ResetHealth(100.0f + my_level * 30.0f);
 
         StartRegularBehavior();
         UpdateHealthText();
@@ -104,7 +106,7 @@ public class BossScript : BaseBoss
         Vector3 new_pos = transform.position;
         new_pos.x -= transform.localScale.x / 2.0f;
         GameObject new_enemy = Instantiate(enemy_prefab, new_pos, Quaternion.identity) as GameObject;
-        new_enemy.GetComponent<BossEnemy>().Initialize(InterestingGameStuff.level, enemy_speed);
+        new_enemy.GetComponent<BossEnemy>().Initialize(my_level, enemy_speed);
         Quaternion new_rotation = Quaternion.LookRotation(new Vector3(5, -enemy_offset + Random.value * enemy_offset * 2, 0), Vector3.forward);
         new_rotation.x = new_rotation.y = 0;
         new_enemy.transform.rotation = new_rotation;

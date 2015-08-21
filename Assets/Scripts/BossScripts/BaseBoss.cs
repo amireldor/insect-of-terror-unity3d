@@ -32,6 +32,12 @@ public class BaseBoss : MonoBehaviour
 
     }
 
+    virtual public void EndStage()
+    {
+        InterestingGameStuff.level++;
+        Application.LoadLevel("level");
+    }
+
     public void ResetHealth(float to = 100.0f)
     {
         health = to;
@@ -45,6 +51,8 @@ public class BaseBoss : MonoBehaviour
             health = 0.0f;
             // boss is dead
             // TODO: initiate death sequence
+
+            EndStage();
         }
         UpdateHealthText();
     }
