@@ -161,8 +161,7 @@ public class MasterScript : MonoBehaviour
     // Final commands to invoke when finishing level, called in `FinishLevel`
     IEnumerator _FinalAction()
     {
-        Application.LoadLevel("level");
-        InterestingGameStuff.level++;
+        Application.LoadLevel("boss");
         yield return null;
     }
 
