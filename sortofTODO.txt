@@ -10,16 +10,25 @@
 	purple men falling funnily
 	bonuses
 fade/something in/out, also on level (didn't do 'in' effect)
-win/lose logic
-move between scenes! woohoo!
+	win logic
+lose logic
+	move between scenes! woohoo!
 
 # phase 1.4
+lose logic level scene
 sounds
-more bosses scripts
+more bosses scripts/prefabs
 maybe change scoring quantities
+
+# phase 1.5
+tweak small stuff such as collision detection areas
 
 #phase 2
 balance game
+musics
+intro scene
+death scene
+tutorial! on first level! important!
 
 
 
