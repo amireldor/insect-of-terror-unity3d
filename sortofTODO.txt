@@ -20,3 +20,17 @@ maybe change scoring quantities
 
 #phase 2
 balance game
+
+
+
+sounds!
+=======
+
+boss WHOAAAAA + explosions
+(both above mixed in boss death sequence)
+shot
+poo nimrax on enemy
+larva slime where enemy moves
+bonus audio
+warning beep
+woosh between levels/scenes
