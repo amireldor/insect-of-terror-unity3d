@@ -49,6 +49,8 @@ public class MasterScript : MonoBehaviour
         Sprite bg_sprite = Resources.Load<Sprite>("backgrounds/level" + my_level);
         bg_renderer.sprite = bg_sprite;
 
+        StartCoroutine(camera_script.TwirlDown());
+
     }
 
     /// <summary>

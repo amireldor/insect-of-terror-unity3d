@@ -5,19 +5,31 @@ using System.Collections;
 public class CameraScript : MonoBehaviour
 {
 
-    private Twirl twirl;
+    public float max_twirl = 180.0f;
+    public float twirl_speed = 200.0f;
 
     // Use this for initialization
     void Start()
     {
-        twirl = GetComponent<Twirl>();
     }
 
     public IEnumerator TwirlUp()
     {
-        for (float f = 0; f < 180.0f; )
+        Twirl twirl = GetComponent <Twirl>();
+        for (float f = 0; f < max_twirl; )
         {
-            f += 200.0f * Time.deltaTime;
+            f += twirl_speed * Time.deltaTime;
+            twirl.angle = f;
+            yield return null;
+        }
+    }
+
+    public IEnumerator TwirlDown()
+    {
+        Twirl twirl = GetComponent <Twirl>();
+        for (float f = max_twirl; f > 0.0f; )
+        {
+            f -= twirl_speed * Time.deltaTime;
             twirl.angle = f;
             yield return null;
         }

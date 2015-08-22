@@ -52,6 +52,8 @@ public class MasterBossScript : MonoBehaviour
         GameObject boss = Instantiate(Resources.Load("Prefabs/Bosses/Boss" + my_level), Vector3.zero, Quaternion.identity) as GameObject;
         boss.GetComponent<BaseBoss>().health_text = health_text;
         StartCoroutine("PowerupCoroutine");
+
+        StartCoroutine(camera_script.TwirlDown());
     }
 
     public void BunosTime(int howmuch = 3)
