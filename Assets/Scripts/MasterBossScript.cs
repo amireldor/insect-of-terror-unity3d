@@ -27,6 +27,7 @@ public class MasterBossScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         left = InterestingGameStuff.left;
         top = InterestingGameStuff.top;
         right = InterestingGameStuff.right;

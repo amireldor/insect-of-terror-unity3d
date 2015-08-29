@@ -25,28 +25,30 @@ public class BossPoo : MonoBehaviour
     {
         Vector3 movement = new Vector3(1, 0, 0) * speed;
         transform.Rotate(new Vector3(0, 0, 1) * rotation_speed * Time.fixedDeltaTime);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement.normalized, movement.magnitude);
-        if (hit.collider.tag == "Enemy")
-        {
-            hit.collider.gameObject.SendMessage("Pooed");
-            Destroy(this.gameObject);
-        }
-        else if (hit.collider.tag == "Powerup")
-        {
-            hit.collider.gameObject.GetComponent<PowerupScript>().ApplyPowerup();
-        }
-        else if (hit.collider.tag == "Boss")
-        {
-            hit.collider.GetComponent<BaseBoss>().LowerHealth();
-            Instantiate(explosion_prefab, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-        }
-
         transform.position += movement * Time.fixedDeltaTime;
 
         if (transform.position.x > InterestingGameStuff.right)
         {
+            Destroy(this.gameObject);
+        }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Enemy")
+        {
+            collider.gameObject.SendMessage("Pooed");
+            Destroy(this.gameObject);
+        }
+        else if (collider.tag == "Powerup")
+        {
+           collider.gameObject.GetComponent<PowerupScript>().ApplyPowerup();
+        }
+        else if (collider.tag == "Boss")
+        {
+            collider.GetComponent<BaseBoss>().LowerHealth();
+            Instantiate(explosion_prefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

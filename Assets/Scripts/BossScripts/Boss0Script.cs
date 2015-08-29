@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossScript : BaseBoss
+public class Boss0Script : BaseBoss
 {
     // not sure if this is the way to go, because there are animator state machines and stuff...
     // but they don't seem to fit
