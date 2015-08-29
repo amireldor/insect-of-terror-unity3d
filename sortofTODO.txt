@@ -9,7 +9,7 @@
 	purple men, think how 2 or how both sides, maybe boss not in middle?
 	purple men falling funnily
 	bonuses
-fade/something in/out, also on level (didn't do 'in' effect)
+	fade/something in/out, also on level (didn't do 'in' effect)
 	win logic
 lose logic
 	move between scenes! woohoo!
