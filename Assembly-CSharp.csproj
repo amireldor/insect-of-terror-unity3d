@@ -51,9 +51,9 @@
      <Compile Include="Assets\Scripts\BossHero.cs" />
      <Compile Include="Assets\Scripts\BossPoo.cs" />
      <Compile Include="Assets\Scripts\BossScripts\BaseBoss.cs" />
-     <Compile Include="Assets\Scripts\BossScripts\Boss2Script.cs" />
      <Compile Include="Assets\Scripts\BossScripts\BossSingleRifle.cs" />
      <Compile Include="Assets\Scripts\BossScripts\BossSpreadGun.cs" />
+     <Compile Include="Assets\Scripts\BossScripts\BossTripleShot.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\EnemyScript.cs" />
      <Compile Include="Assets\Scripts\Explosion.cs" />
