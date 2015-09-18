@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boss3Script : BaseBoss {
+public class Boss2Script : BaseBoss {
 
 	// Use this for initialization
 	void Start () {
