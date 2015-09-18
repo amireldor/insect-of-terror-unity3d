@@ -5,9 +5,10 @@ public class BossTripleShot : BaseBoss {
 
     public float fire_delay  = 0.78f;
     public int shots_per_shooting = 4; // how many shots are fired each time the boss shoots
-    public float change_behavior_rate = 2.3f;
+    public float change_behavior_time = 2.3f;
     public float movement_speed = 0.12f;
-    
+    public float shiver_value = 0.02f;
+
     public GameObject enemy_prefab;
     public float enemy_speed = 1.7f;
 
@@ -20,37 +21,57 @@ public class BossTripleShot : BaseBoss {
 	void Start () {
         Vector3 new_pos = new Vector3((InterestingGameStuff.right) - transform.localScale.x * 0.62f, 0, 0);
         transform.position = new_pos;
-        Fire();
+        RandomMove();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void FixedUpdate () {
+        behavior();
 	}
 
     // Start firing sequence
     void Fire()
     {
+        behavior = null;
+        Shiver();
+        
         int shots = shots_per_shooting;
         while (shots-- > 0)
         {
             Invoke("SingleShot", shots * fire_delay); // each shot has increasing delay
         }
+
+        Invoke("StopShiver", fire_delay * (shots_per_shooting - 1));
+        Invoke("RandomMove", fire_delay * (shots_per_shooting - 1) + change_behavior_time);
     }
 
     void RandomMove()
     {
-        target_position = new Vector3(0, (InterestingGameStuff.top + Random.value * (InterestingGameStuff.down - InterestingGameStuff.top), 0);
+        target_position = new Vector3(transform.position.x, InterestingGameStuff.top + Random.value * (InterestingGameStuff.bottom - InterestingGameStuff.top), 0);
         behavior = MoveTowardsTarget;
+        Invoke("Fire", change_behavior_time);
     }
 
     void MoveTowardsTarget()
     {
-        Vector3 movement_vector = target_position - transform.position;
-        // limit movement magnitude to `movement_speed
-        if (movement_vector.sqrMagnitude >= movement_speed)
-        {
-        }
+        Vector3 new_pos = Vector3.MoveTowards(transform.position, target_position, movement_speed * Time.fixedDeltaTime);
+        transform.position = new_pos;
+    }
+
+    void Shiver()
+    {
+        InvokeRepeating("_ShiverStep", 0, 0.08f);
+    }
+
+    void StopShiver()
+    {
+        CancelInvoke("_ShiverStep");
+    }
+
+    void _ShiverStep()
+    {
+        Vector3 shiver_vec = new Vector3(-0.5f + Random.value, -0.5f + Random.value, 0);
+        shiver_vec *= shiver_value * Time.fixedDeltaTime;
+        transform.Translate(shiver_vec);
     }
 
     void SingleShot()
@@ -67,7 +88,7 @@ public class BossTripleShot : BaseBoss {
         new_enemy.transform.Translate(translate_vector);
         new_enemy.transform.Rotate(new Vector3(0, 0, 90));
 
-        float vertical_translation = transform.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2.0f;
+        float vertical_translation = transform.GetComponent<SpriteRenderer>().sprite.bounds.size.y * 0.4f;
 
         // up enemy
         new_enemy = Instantiate(enemy_prefab, new_pos, Quaternion.identity) as GameObject;
