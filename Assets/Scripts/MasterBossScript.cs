@@ -28,7 +28,7 @@ public class MasterBossScript : MonoBehaviour
     void Start()
     {
         // TEMP for testing
-        InterestingGameStuff.level = 2;
+        //InterestingGameStuff.level = 0;
 
         left = InterestingGameStuff.left;
         top = InterestingGameStuff.top;

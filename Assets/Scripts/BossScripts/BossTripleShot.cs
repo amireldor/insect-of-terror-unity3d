@@ -21,11 +21,12 @@ public class BossTripleShot : BaseBoss {
 	void Start () {
         Vector3 new_pos = new Vector3((InterestingGameStuff.right) - transform.localScale.x * 0.62f, 0, 0);
         transform.position = new_pos;
+        behavior = null;
         RandomMove();
 	}
 	
 	void FixedUpdate () {
-        behavior();
+        if (behavior != null) behavior();
 	}
 
     // Start firing sequence
