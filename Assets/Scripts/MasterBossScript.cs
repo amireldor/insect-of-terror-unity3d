@@ -87,6 +87,11 @@ public class MasterBossScript : MonoBehaviour
             countdown = 0;
             // level over
         }
+        if (countdown <= 10)
+        {
+            // warning!
+            countdown_text.GetComponent<TextColorScript>().target_color = Color.red;
+        }
         UpdateCountdownText();
     }
 
