@@ -132,7 +132,7 @@ public class MasterScript : MonoBehaviour
 
     void UpdateCountdownText()
     {
-        countdown_text.text = "Time: " + countdown;
+        countdown_text.text = "Time left: " + countdown;
     }
 
     void CountdownBeat()
@@ -142,6 +142,11 @@ public class MasterScript : MonoBehaviour
         {
             countdown = 0;
             // level over
+        }
+        if (countdown <= 10)
+        {
+            // warning!
+            countdown_text.GetComponent<TextColorScript>().target_color = Color.red;
         }
         UpdateCountdownText();
     }

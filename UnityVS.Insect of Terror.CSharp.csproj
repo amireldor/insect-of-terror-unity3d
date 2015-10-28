@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\PooScript.cs" />
     <Compile Include="Assets\Scripts\PowerupScript.cs" />
     <Compile Include="Assets\Scripts\SharedScript.cs" />
+    <Compile Include="Assets\Scripts\TextColorScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
