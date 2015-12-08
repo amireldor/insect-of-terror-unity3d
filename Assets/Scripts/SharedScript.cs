@@ -4,7 +4,7 @@ using System.Collections;
 public static class InterestingGameStuff
 {
     public static int level = 0;
-    public static float left = -3, top = -2, right = +3, bottom = +2;
+    public static float left = -4, top = -3, right = +4, bottom = +3; // how do I expose this to Unity UI?
 
     private static Sprite[] enemy_sprites = null;
 
