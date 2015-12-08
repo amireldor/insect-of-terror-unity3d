@@ -10,11 +10,13 @@ public class EnemyScript : MonoBehaviour
     private float speed;
     private Sprite final_sprite;
     private bool shitted;
+    public float fade_rate = 2.4f;
 
     // Use this for initialization
     void Start()
     {
         shitted = false;
+        StartCoroutine("FadeIn");
     }
 
     public void randomRotationVector()
@@ -69,22 +71,62 @@ public class EnemyScript : MonoBehaviour
             // wrap around world
             if (position.x < left)
             {
-                position.x = right;
+                Vector3 newPos = position;
+                newPos.x = right;
+                StartCoroutine("WrapAroundWorld", newPos);
             }
             if (position.x > right)
             {
-                position.x = left;
+                Vector3 newPos = position;
+                newPos.x = left;
+                StartCoroutine("WrapAroundWorld", newPos);
             }
             if (position.y < top)
             {
-                position.y = bottom;
+                Vector3 newPos = position;
+                newPos.y = bottom;
+                StartCoroutine("WrapAroundWorld", newPos);
             }
             if (position.y > bottom)
             {
-                position.y = top;
+                Vector3 newPos = position;
+                newPos.y = top;
+                StartCoroutine("WrapAroundWorld", newPos);
             }
             transform.position = position;
         }
+    }
+
+    /// <summary>
+    /// Will fade out the enemy and fade in the new position given.
+    /// </summary>
+    /// <param name="newPosition"></param>
+    /// <returns></returns>
+    IEnumerator WrapAroundWorld(Vector3 newPosition)
+    {
+        float alpha = 1;
+        const float alpha_change = 2.4f;
+        while (alpha > 0)
+        {
+            this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
+            alpha -= alpha_change * Time.deltaTime;
+            yield return null;
+        }
+        this.transform.position = newPosition;
+        StartCoroutine("FadeIn");
+    }
+
+    IEnumerator FadeIn()
+    {
+        float alpha = 0;
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
+        while (alpha < 1)
+        {
+            this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
+            alpha += fade_rate * Time.deltaTime;
+            yield return null;
+        }
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
     }
 
     void MowedByLawnMower()

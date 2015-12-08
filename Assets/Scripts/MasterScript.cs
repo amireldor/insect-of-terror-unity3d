@@ -43,40 +43,40 @@ public class MasterScript : MonoBehaviour
         score_max += (score_max / 10) * my_level;
         UpdateScoreText();
 
-        CreateLevelBorders();
+        //CreateLevelBorders();
 
         StartCoroutine(camera_script.TwirlDown());
 
     }
 
-    void CreateLevelBorders()
-    {
-        GameObject tilePrefab = Resources.Load<GameObject>("Prefabs/Border Tile");
-        SpriteRenderer spriteRenderer = tilePrefab.GetComponent<SpriteRenderer>();
+    //void CreateLevelBorders()
+    //{
+    //    GameObject tilePrefab = Resources.Load<GameObject>("Prefabs/Border Tile");
+    //    SpriteRenderer spriteRenderer = tilePrefab.GetComponent<SpriteRenderer>();
 
-        float margin_y = (InterestingGameStuff.bottom - InterestingGameStuff.top) / 12; 
-        float margin_x = (InterestingGameStuff.right - InterestingGameStuff.left) / 16;
-        float z = +4;
+    //    float margin_y = (InterestingGameStuff.bottom - InterestingGameStuff.top) / 12; 
+    //    float margin_x = (InterestingGameStuff.right - InterestingGameStuff.left) / 16;
+    //    float z = +4;
 
-        // vertical columns
-        for (float y = InterestingGameStuff.top; y <= InterestingGameStuff.bottom; y += margin_y)
-        {
-            Vector3 position;
-            position = new Vector3(InterestingGameStuff.left, y, z);
-            Instantiate(tilePrefab).transform.position = position;
-            position = new Vector3(InterestingGameStuff.right, y, z);
-            Instantiate(tilePrefab).transform.position = position;
-        }
-        // horizontal columns
-        for (float x = InterestingGameStuff.left; x <= InterestingGameStuff.right; x += margin_x)
-        {
-            Vector3 position;
-            position = new Vector3(x,InterestingGameStuff.top, z);
-            Instantiate(tilePrefab).transform.position = position;
-            position = new Vector3(x, InterestingGameStuff.bottom, z);
-            Instantiate(tilePrefab).transform.position = position;
-        }
-    }
+    //    // vertical columns
+    //    for (float y = InterestingGameStuff.top; y <= InterestingGameStuff.bottom; y += margin_y)
+    //    {
+    //        Vector3 position;
+    //        position = new Vector3(InterestingGameStuff.left, y, z);
+    //        Instantiate(tilePrefab).transform.position = position;
+    //        position = new Vector3(InterestingGameStuff.right, y, z);
+    //        Instantiate(tilePrefab).transform.position = position;
+    //    }
+    //    // horizontal columns
+    //    for (float x = InterestingGameStuff.left; x <= InterestingGameStuff.right; x += margin_x)
+    //    {
+    //        Vector3 position;
+    //        position = new Vector3(x,InterestingGameStuff.top, z);
+    //        Instantiate(tilePrefab).transform.position = position;
+    //        position = new Vector3(x, InterestingGameStuff.bottom, z);
+    //        Instantiate(tilePrefab).transform.position = position;
+    //    }
+    //}
 
     /// <summary>
     /// Iterates through enemies and changes their rotationVector,
