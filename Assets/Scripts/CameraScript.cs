@@ -22,6 +22,7 @@ public class CameraScript : MonoBehaviour
             twirl.angle = f;
             yield return null;
         }
+        twirl.angle = max_twirl;
     }
 
     public IEnumerator TwirlDown()
@@ -33,8 +34,8 @@ public class CameraScript : MonoBehaviour
             twirl.angle = f;
             yield return null;
         }
+        twirl.angle = 0;
     }
-
     // Update is called once per frame
     void Update()
     {
