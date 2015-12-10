@@ -6,15 +6,10 @@ public class LawnMowerScript : MonoBehaviour
 
     public MasterScript master;
     public float speed = 3.0f;
-    public  float rotationSpeed = 260.0f;
-    private Vector3 velocity;
+    public float rotationSpeed = 260.0f;
+    private Vector3 velocity = Vector3.zero;
 
-    private System.Collections.Generic.List<Vector3> waypoints; // where to go? essentially places of pooped-upon enemies
-
-    LawnMowerScript()
-    {
-        waypoints = new System.Collections.Generic.List<Vector3>();
-    }
+    private System.Collections.Generic.List<Vector3> waypoints = new System.Collections.Generic.List<Vector3>(); // where to go? essentially places of pooped-upon enemies
 
     public void AddWaypoint(Vector3 point) {
         waypoints.Add(point);
@@ -44,11 +39,19 @@ public class LawnMowerScript : MonoBehaviour
         }
         else
         {
-            float turnSpeed = 240 * Time.fixedDeltaTime;
+            float turnSpeed = rotationSpeed * Time.fixedDeltaTime;
             Vector3 to = waypoints[waypoints.Count - 1];
             Quaternion newRotation = Quaternion.LookRotation(transform.position - to, Vector3.forward);
             newRotation.x = newRotation.y = 0;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, turnSpeed);
+            Debug.Log(transform.up);
+            transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
+
+            if (Vector3.SqrMagnitude(transform.position - to) < Mathf.Pow(0.01f, 2))
+            {
+                // arrived at waypoint
+                waypoints.Remove(waypoints[waypoints.Count - 1]);
+            }
         }
     }
 
