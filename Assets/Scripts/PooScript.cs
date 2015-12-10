@@ -8,6 +8,7 @@ public class PooScript : MonoBehaviour
     private float final_height; // y in the final vector, used to clamp stuff
     public float height = 1.4f;
     public float speed;
+    static LawnMowerScript lawnMowerScript;
 
     private HashSet<GameObject> colliding_enemies;
 
@@ -17,6 +18,9 @@ public class PooScript : MonoBehaviour
         final_height = transform.position.y - height;
         transform.Rotate(new Vector3(0, 0, Random.value * 360.0f));
         colliding_enemies = new HashSet<GameObject>();
+        if (!lawnMowerScript) {
+            lawnMowerScript = GameObject.Find("/Lawn Mower").GetComponent<LawnMowerScript>();
+        }
     }
 
     // Update is called once per frame
@@ -54,7 +58,11 @@ public class PooScript : MonoBehaviour
             // poop all enemies
             foreach (GameObject obj in colliding_enemies)
             {
-                if (obj) obj.SendMessage("Shitted");
+                if (obj)
+                {
+                    obj.SendMessage("Shitted");
+                    lawnMowerScript.AddWaypoint(obj.transform.position);
+                }
             }
 
             Destroy(this.gameObject);

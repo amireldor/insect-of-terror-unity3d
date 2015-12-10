@@ -6,80 +6,49 @@ public class LawnMowerScript : MonoBehaviour
 
     public MasterScript master;
     public float speed = 3.0f;
-    public float y_movement_factor = 0.4f;
-    private string direction;
+    public  float rotationSpeed = 260.0f;
     private Vector3 velocity;
+
+    private System.Collections.Generic.List<Vector3> waypoints; // where to go? essentially places of pooped-upon enemies
+
+    LawnMowerScript()
+    {
+        waypoints = new System.Collections.Generic.List<Vector3>();
+    }
+
+    public void AddWaypoint(Vector3 point) {
+        waypoints.Add(point);
+    }
 
     // Use this for initialization
     void Start()
     {
-        Vector3 new_pos = new Vector3(master.left, 0, 0);
-        transform.position = new_pos;
-        direction = "right";
+        transform.position = Vector3.zero;
         velocity = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && velocity == Vector3.zero)
-        {
-            if (direction == "right")
-            {
-                velocity.x = speed;
-            }
-            else
-            {
-                velocity.x = -speed;
-            }
-        }
     }
 
     void SwitchDirection()
     {
-        if (direction == "right")
-        {
-            direction = "left";
-        }
-        else
-        {
-            direction = "right";
-        }
-        transform.Rotate(new Vector3(0, 0, 180));
     }
 
     void FixedUpdate()
     {
-        if (velocity != Vector3.zero)
+        if (waypoints.Count == 0)
         {
-            transform.position += velocity * Time.fixedDeltaTime;
-
-            if (transform.position.x > master.right)
-            {
-                Vector3 new_pos = transform.position;
-                new_pos.x = master.right;
-                transform.position = new_pos;
-                SwitchDirection();
-                velocity = Vector3.zero;
-            }
-
-            if (transform.position.x < master.left)
-            {
-                Vector3 new_pos = transform.position;
-                new_pos.x = master.left;
-                transform.position = new_pos;
-                SwitchDirection();
-                velocity = Vector3.zero;
-            }
+            this.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.fixedDeltaTime);
         }
         else
         {
-            // velocity == Vector3.zero
-            Vector3 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float dist;
-            dist = mouse_pos.y - transform.position.y;
-            dist /= y_movement_factor;
-            transform.position += new Vector3(0, dist * Time.deltaTime, 0);
+            float turnSpeed = 240 * Time.fixedDeltaTime;
+            Vector3 to = waypoints[waypoints.Count - 1];
+            Quaternion newRotation = Quaternion.LookRotation(transform.position - to, Vector3.forward);
+            newRotation.x = newRotation.y = 0;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, turnSpeed);
         }
     }
 
@@ -87,4 +56,4 @@ public class LawnMowerScript : MonoBehaviour
     {
         coll.SendMessage("MowedByLawnMower");
     }
-}
+} 
