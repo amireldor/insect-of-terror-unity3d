@@ -10,14 +10,14 @@ public class PooScript : MonoBehaviour
     public float speed;
     static LawnMowerScript lawnMowerScript;
 
-    private HashSet<GameObject> colliding_enemies;
+    private HashSet<GameObject> collidingGameObjects;
 
     // Use this for initialization
     void Start()
     {
         final_height = transform.position.y - height;
         transform.Rotate(new Vector3(0, 0, Random.value * 360.0f));
-        colliding_enemies = new HashSet<GameObject>();
+        collidingGameObjects = new HashSet<GameObject>();
         if (!lawnMowerScript) {
             lawnMowerScript = GameObject.Find("/Lawn Mower").GetComponent<LawnMowerScript>();
         }
@@ -31,20 +31,23 @@ public class PooScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        EnemyScript script = coll.GetComponent<EnemyScript>();
-        if (script != null)
-        {
-            if (!script.IsShitted())
-            {
-                colliding_enemies.Add(coll.gameObject);
+        if (coll.tag == "Enemy") {
+            // add enemy to list only if it has not been pooped upon
+            EnemyScript enemyScript = coll.GetComponent<EnemyScript>();
+            if (enemyScript != null) {
+                if (!enemyScript.IsShitted()) {
+                    collidingGameObjects.Add(coll.gameObject);
+                }
             }
+        } else {
+            collidingGameObjects.Add(coll.gameObject);
         }
     }
 
     void OnTriggerExit2D(Collider2D coll)
     {
         //Debug.Log ("out ID " + coll.gameObject.GetInstanceID());
-        colliding_enemies.Remove(coll.gameObject);
+        collidingGameObjects.Remove(coll.gameObject);
     }
 
     void FixedUpdate()
@@ -56,7 +59,7 @@ public class PooScript : MonoBehaviour
             new_position.y = final_height;
 
             // poop all enemies
-            foreach (GameObject obj in colliding_enemies)
+            foreach (GameObject obj in collidingGameObjects)
             {
                 if (obj)
                 {

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class LawnMowerScript : MonoBehaviour
 {
 
-    public MasterScript master;
     public float speed = 3.0f;
     public float rotationSpeed = 260.0f;
     public int maxPoopedUpon = 8; // how many poops can slow the lawnmower in the same time
@@ -71,6 +70,7 @@ public class LawnMowerScript : MonoBehaviour
 
     public void Shitted()
     {
+        Debug.Log("SHITTED!");
         Quaternion randomRotation = Quaternion.Euler(0, 0, Random.value * 180.0f);
         GameObject newPoop = Instantiate(disappearPoop, this.transform.position, randomRotation) as GameObject;
         newPoop.transform.parent = this.transform;
