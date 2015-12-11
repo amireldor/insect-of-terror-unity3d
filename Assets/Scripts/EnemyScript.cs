@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour
     private float speed;
     private Sprite final_sprite;
     private bool shitted;
+    private System.DateTime shittedTime;
     public float fade_rate = 2.4f;
 
     // Use this for initialization
@@ -52,6 +53,7 @@ public class EnemyScript : MonoBehaviour
         SpriteRenderer sprite_renderer = GetComponent<SpriteRenderer>();
         sprite_renderer.sprite = final_sprite;
         shitted = true;
+        shittedTime = System.DateTime.Now;
     }
 
     // Update is called once per frame
@@ -142,5 +144,9 @@ public class EnemyScript : MonoBehaviour
     public bool IsShitted()
     {
         return shitted;
+    }
+
+    public System.DateTime ShittedTime {
+        get { return shittedTime; }
     }
 }

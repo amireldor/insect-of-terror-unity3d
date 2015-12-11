@@ -61,7 +61,6 @@ public class PooScript : MonoBehaviour
                 if (obj)
                 {
                     obj.SendMessage("Shitted");
-                    lawnMowerScript.AddWaypoint(obj.transform.position);
                 }
             }
 

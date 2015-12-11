@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -106,24 +108,6 @@
     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Twirl.cs" />
     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\AssScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossEnemy.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossHero.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossPoo.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossScripts\BaseBoss.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossScripts\BossSingleRifle.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossScripts\BossSpreadGun.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\BossScripts\BossTripleShot.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\CameraScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\EnemyScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\Explosion.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\LawnMowerScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\MasterBossScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\MasterScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\PooScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\PowerupScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\SharedScript.cs" />
-    <Compile Include="Assets\Standard Assets\Scripts\TextColorScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
