@@ -51,12 +51,17 @@ public class LawnMowerScript : MonoBehaviour
         }
         else
         {
+            float actualSpeed = (1 - (float)poopsUpon / (float)maxPoopedUpon) * speed; // we slow down if pooped upon
+            Debug.Log("Actualy speed " + actualSpeed);
+            if (actualSpeed < 0) {
+                actualSpeed = 0; // just in case
+            }
             float turnSpeed = rotationSpeed * Time.fixedDeltaTime;
             Vector3 to = whenAndWhere[whenAndWhere.Count - 1].Value;
             Quaternion newRotation = Quaternion.LookRotation(transform.position - to, Vector3.forward);
             newRotation.x = newRotation.y = 0;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, turnSpeed);
-            transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
+            transform.Translate(Vector3.up * actualSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -70,9 +75,17 @@ public class LawnMowerScript : MonoBehaviour
 
     public void Shitted()
     {
-        Debug.Log("SHITTED!");
-        Quaternion randomRotation = Quaternion.Euler(0, 0, Random.value * 180.0f);
-        GameObject newPoop = Instantiate(disappearPoop, this.transform.position, randomRotation) as GameObject;
-        newPoop.transform.parent = this.transform;
+        if (poopsUpon < maxPoopedUpon) {
+            poopsUpon++;
+            Quaternion randomRotation = Quaternion.Euler(0, 0, Random.value * 180.0f);
+            GameObject newPoop = Instantiate(disappearPoop, this.transform.position, randomRotation) as GameObject;
+            newPoop.transform.parent = this.transform;
+        }
+    }
+
+    public void DisappearPoopDisappeared() {
+        if (poopsUpon > 0) {
+            poopsUpon--;
+        }
     }
 } 

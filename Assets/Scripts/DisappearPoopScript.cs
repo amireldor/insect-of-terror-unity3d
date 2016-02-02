@@ -12,6 +12,7 @@ public class DisappearPoopScript : MonoBehaviour {
 
     void Disappear()
     {
+        gameObject.transform.parent.SendMessage("DisappearPoopDisappeared");
         Destroy(this.gameObject);
     }
 
